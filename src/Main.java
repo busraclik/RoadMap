@@ -23,6 +23,7 @@ public class Main {
         boolean forward = true;
 
         while (flag){
+            //check location
             if (!iterator.hasPrevious()){
                 System.out.println("\nStart location: "+ iterator.next());
                 forward = true;
