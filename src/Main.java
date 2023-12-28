@@ -9,15 +9,30 @@ public class Main {
     public static void main(String[] args) {
 
         LinkedList<Town> townLinkedList = new LinkedList<>();
-        addTowns(townLinkedList);
 
+        addTowns(townLinkedList , new Town("Sydney", 0));
+        addTowns(townLinkedList , new Town("Adelaide", 1374));
+        addTowns(townLinkedList , new Town("Alice Springs", 2771));
+        addTowns(townLinkedList , new Town("Brisbane", 917));
+        addTowns(townLinkedList , new Town("Darwin", 3972));
+        addTowns(townLinkedList , new Town("Melbourne", 877));
+        addTowns(townLinkedList , new Town("Perth", 3923));
 
         var iterator = townLinkedList.listIterator();
-
         boolean flag = true;
+        boolean forward = true;
 
         while (flag){
-            System.out.println("Available actions (select word or letter) :\n" +
+            if (!iterator.hasPrevious()){
+                System.out.println("\nStart location: "+ iterator.next());
+                forward = true;
+            }
+            if (!iterator.hasNext()){
+                System.out.println("\nFinal location: "+ iterator.previous());
+                forward = false;
+            }
+
+            System.out.println("\nAvailable actions (select word or letter) :\n" +
                     "(F)orward\n" +
                     "(B)ackward\n" +
                     "(L)ist Places\n" +
@@ -25,22 +40,40 @@ public class Main {
                     "(Q)uit\n ");
 
             System.out.println("Please enter your choice: ");
-            String choice = scanner.nextLine();
+            String choice = scanner.nextLine().toUpperCase().substring(0,1);
 
             switch (choice){
-                case "f" -> {
+                case "F" -> {
+                    if (!forward){
+                        forward = true;
+                        if (iterator.hasNext()){
+                            iterator.next();
+                        }
+                    }
                     if(iterator.hasNext()){
-                        Town town = iterator.next();
-                        System.out.println("city name: " + town.getName() + " distance:  " + town.getDistance());
+                        System.out.println(iterator.next());
                     }
                 }
-                case "b" -> {
-                    if(iterator.hasPrevious()){
-                        Town town = iterator.previous();
-                        System.out.println("city name: " + town.getName() + " distance:  " + town.getDistance());
+                case "B" -> {
+                    if (forward){
+                        forward = false;
+                        if (iterator.hasPrevious()){
+                            iterator.previous();
+                        }
                     }
-                }
 
+                    if(iterator.hasPrevious()){
+                        System.out.println(iterator.previous());
+                    }
+                }
+                case "L" -> System.out.println(townLinkedList);
+                case "M" -> {
+                  continue;
+                }
+                case "Q" -> {
+                    System.out.println("Exit...");
+                    flag = false;
+                }
                 default -> System.out.println("Wrong choice.");
             }
         }
@@ -48,23 +81,25 @@ public class Main {
 
     }
 
-    public static void printList(LinkedList<Town> list){
-        var iterator = list.listIterator();
+//    public static void printList(LinkedList<Town> list){
+//        var iterator = list.listIterator();
+//
+//        while (iterator.hasNext()){
+//            Town town = iterator.next();
+//            System.out.println( town.getName() + " " + town.getDistance());
+//        }
+//    }
 
-        while (iterator.hasNext()){
-            Town town = iterator.next();
-            System.out.println("city name: " + town.getName() + " distance:  " + town.getDistance());
+    public static void addTowns(LinkedList<Town> list, Town town){
+        int index = 0;
+        for (Town t : list) {
+            if (town.getDistance()  < t.getDistance()){
+                list.add(index, town);
+                return;
+            }
+            index++;
         }
-    }
-
-    public static void addTowns(LinkedList<Town> list){
-        list.add(new Town("Sydney", 0));
-        list.add(new Town("Adelaide", 1374));
-        list.add(new Town("Alice Springs", 2771));
-        list.add(new Town("Brisbane", 917));
-        list.add(new Town("Darwin", 3972));
-        list.add(new Town("Malbourn", 877));
-        list.add(new Town("Perth", 3923));
+       list.add(town);
     }
 
 }

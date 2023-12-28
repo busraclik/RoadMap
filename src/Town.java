@@ -7,11 +7,16 @@ public class Town {
         this.distance = distance;
     }
 
-    public String getName() {
-        return name;
-    }
-
+//    public String getName() {
+//        return name;
+//    }
+//
     public double getDistance() {
         return distance;
+    }
+
+    @Override
+    public String toString() {
+        return name + " " + distance ;
     }
 }
