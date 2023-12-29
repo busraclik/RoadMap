@@ -14,7 +14,10 @@ public class Main {
         addTowns(townLinkedList , new Town("Adelaide", 1374));
         addTowns(townLinkedList , new Town("Alice Springs", 2771));
         addTowns(townLinkedList , new Town("Brisbane", 917));
+//sehir tekrarının önlenmesi lazım
         addTowns(townLinkedList , new Town("Darwin", 3972));
+        addTowns(townLinkedList , new Town("Darwin", 3972));
+        addTowns(townLinkedList , new Town("darwin", 3972));
         addTowns(townLinkedList , new Town("Melbourne", 877));
         addTowns(townLinkedList , new Town("Perth", 3923));
 
@@ -92,9 +95,11 @@ public class Main {
 //    }
 
     public static void addTowns(LinkedList<Town> list, Town town){
+        //index yerine iteratorle yapılacak
+        //time complexity
         int index = 0;
         for (Town t : list) {
-            if (town.getDistance()  < t.getDistance()){
+            if (town.distance() < t.distance()){
                 list.add(index, town);
                 return;
             }
