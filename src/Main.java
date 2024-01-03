@@ -21,11 +21,11 @@ public class Main {
         addTowns1(townLinkedList , new Town("Perth", 3923));
 
         var iterator = townLinkedList.listIterator();
-        boolean flag = true;
+        boolean continueLoop = true;
         boolean forward = true;
 
         printMenu();
-        while (flag){
+        while (continueLoop){
             //check location
             if (!iterator.hasPrevious()){
                 System.out.println("\nStart location: "+ iterator.next());
@@ -68,7 +68,7 @@ public class Main {
                 }
                 case "Q" -> {
                     System.out.println("Exit...");
-                    flag = false;
+                    continueLoop = false;
                 }
                 default -> printMenu();
             }
