@@ -89,26 +89,6 @@ public class Main {
 
     }
 
-//    public static void addTowns(LinkedList<Town> list, Town town){
-//        for (Town p : list){
-//            if (p.name().equalsIgnoreCase(town.name())){
-//                System.out.println("Found duplicate: " + town);
-//                return;
-//            }
-//        }
-//        int index = 0;
-//        for (Town t : list) {
-//            if (town.distance() < t.distance()){
-//                list.add(index, town);
-//                return;
-//            }
-//            index++;
-//        }
-//       list.add(town);
-//    }
-
-
-
 
     public static void addTowns1(LinkedList<Town> list, Town town) {
 
